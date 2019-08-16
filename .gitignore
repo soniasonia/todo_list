@@ -11,5 +11,4 @@ env/
 # Data
 data/
 *.zip
-*txt
 db.sqlite3
