@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <title>Listy rzeczy do zrobienia</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-md-9 col-md-offset-2">
+                <div class="text-center jumbotron">
+                    <h1>{% block header_text %}{% endblock %}</h1>
+                    <form novalidate method="POST" action={% block form_action %}{% endblock %}>
+                        {{ form.text }}
+                        {% csrf_token %}
+                        {% if form.errors %}
+                        <div class="form-group has-error">
+                            <div class="help-block">{{ form.text.errors }}</div>
+                        </div>
+                        {%endif %}
+
+                    </form>
+                </div>
+                {% block table %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

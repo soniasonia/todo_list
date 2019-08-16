@@ -1,0 +1,15 @@
+# IDE
+.idea
+__pycache__/
+
+# Environments
+.venv
+.env
+venv/
+env/
+
+# Data
+data/
+*.zip
+*txt
+db.sqlite3
