@@ -19,13 +19,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'o821lhpnph-9=%_beql&ywu8bz_2esj1if1v#((la99j_m%brh'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
@@ -74,10 +71,19 @@ WSGI_APPLICATION = 'todo_list.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
+try:
+    from .config import DATABASES
+    from .config import SECRET_KEY
+except ModuleNotFoundError:
+    SECRET_KEY = os.environ['SECRET_KEY']
+    DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['USER'],
+        'PASSWORD': os.environ['PASS'],
+        'HOST': os.environ['HOST'],
+        'PORT': os.environ['PORT'],
     }
 }
 
@@ -126,10 +132,10 @@ import django_heroku
 
 django_heroku.settings(locals())
 
-# static files settings
-# location where you will store your static files like bootstrap
-STATICFILES_DIRS = [
-   os.path.join(BASE_DIR, "static"),
-]
-# location where django collect all static files
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# # static files settings
+# # location where you will store your static files like bootstrap
+# STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "static"),
+# ]
+# # location where django collect all static files
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")

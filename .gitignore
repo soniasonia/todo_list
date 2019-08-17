@@ -12,3 +12,4 @@ env/
 data/
 *.zip
 db.sqlite3
+todo_list/config.py
