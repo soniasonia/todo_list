@@ -1,6 +1,6 @@
-#todo_list
-###Project based on book "TDD with Python"
+# Project based on book "TDD with Python"
 
-### Typical issues that I encounter while working with Django:
+### Lesson learned:
 - Django test runner cannot find test files
--- There has to be __init__ in "test" folder
+  - There has to be init file in "test" folder
+  - test functions starts with "test.."
